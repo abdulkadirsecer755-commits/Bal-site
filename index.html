@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESİLA - Seni Seviyorum</title>
+  <title>ESİLA</title>
   <style>
     * {
       margin: 0;
@@ -12,7 +12,7 @@
     }
 
     body {
-      background-color: #050005;
+      background-color: #0d000d;
       color: #fff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       height: 100vh;
@@ -27,52 +27,53 @@
     /* Sol Üst Köşe: Sonsuzluk ve Kalp */
     .top-left-icon {
       position: absolute;
-      top: 25px;
-      left: 25px;
-      font-size: 28px;
+      top: 30px;
+      left: 30px;
+      font-size: 32px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       z-index: 10;
       color: #ff2a75;
-      text-shadow: 0 0 10px #ff2a75, 0 0 20px #ff2a75;
-      animation: glow 2s infinite alternate;
+      text-shadow: 0 0 12px #ff2a75, 0 0 25px #ff2a75;
+      animation: glow 2.5s infinite alternate ease-in-out;
     }
 
-    /* Ana Konteyner ve Sonsuz Atan Kalp Animasyonu */
+    /* Ana Kalp Konteyneri ve Yavaş Yumuşak Atış */
     .heart-container {
       position: relative;
-      width: 600px;
-      height: 600px;
+      width: 90vw;
+      height: 80vh;
+      max-width: 850px;
+      max-height: 850px;
       display: flex;
       justify-content: center;
       align-items: center;
-      animation: heartbeat 1.2s infinite ease-in-out;
+      animation: softHeartbeat 2s infinite ease-in-out;
     }
 
-    @keyframes heartbeat {
+    @keyframes softHeartbeat {
       0% {
         transform: scale(1);
       }
-      14% {
-        transform: scale(1.08);
+      30% {
+        transform: scale(1.05);
       }
-      28% {
-        transform: scale(1);
+      60% {
+        transform: scale(0.98);
       }
-      42% {
-        transform: scale(1.08);
-      }
-      70% {
+      100% {
         transform: scale(1);
       }
     }
 
-    /* Canvas: Kalp çizgisini oluşturan yazılar */
+    /* Canvas */
     canvas {
       position: absolute;
       top: 0;
       left: 0;
+      width: 100%;
+      height: 100%;
     }
 
     /* Kalbin Ortasındaki ESİLA Yazısı */
@@ -84,32 +85,26 @@
     }
 
     .center-text h1 {
-      font-size: 64px;
-      font-weight: 800;
+      font-size: 82px;
+      font-weight: 900;
       color: #ffffff;
-      letter-spacing: 4px;
+      letter-spacing: 6px;
       text-shadow: 
-        0 0 10px #ff2a75,
-        0 0 20px #ff2a75,
+        0 0 15px #ff2a75,
         0 0 30px #ff2a75,
-        0 0 40px #ff0055;
-      animation: pulseText 2s infinite alternate;
-    }
-
-    .center-text p {
-      font-size: 16px;
-      color: #ff99bb;
-      margin-top: 5px;
-      letter-spacing: 2px;
-      text-shadow: 0 0 5px #ff2a75;
+        0 0 45px #ff2a75,
+        0 0 60px #ff0055;
+      animation: pulseText 2.5s infinite alternate ease-in-out;
     }
 
     @keyframes pulseText {
       from {
-        text-shadow: 0 0 10px #ff2a75, 0 0 20px #ff2a75, 0 0 30px #ff2a75;
+        text-shadow: 0 0 15px #ff2a75, 0 0 25px #ff2a75, 0 0 35px #ff0055;
+        transform: scale(1);
       }
       to {
-        text-shadow: 0 0 15px #ff6699, 0 0 30px #ff2a75, 0 0 45px #ff0055, 0 0 60px #ff0055;
+        text-shadow: 0 0 25px #ff6699, 0 0 45px #ff2a75, 0 0 65px #ff0055, 0 0 85px #ff0055;
+        transform: scale(1.03);
       }
     }
 
@@ -119,7 +114,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 120px;
+      height: 100px;
       overflow: hidden;
       z-index: 2;
     }
@@ -132,16 +127,16 @@
     .ecg-line {
       fill: none;
       stroke: #ff2a75;
-      stroke-width: 3;
-      stroke-dasharray: 2000;
-      stroke-dashoffset: 2000;
-      animation: ecgDraw 3s linear infinite;
-      filter: drop-shadow(0px 0px 8px #ff2a75);
+      stroke-width: 3.5;
+      stroke-dasharray: 2400;
+      stroke-dashoffset: 2400;
+      animation: ecgDraw 3.5s linear infinite;
+      filter: drop-shadow(0px 0px 10px #ff2a75);
     }
 
     @keyframes ecgDraw {
       0% {
-        stroke-dashoffset: 2000;
+        stroke-dashoffset: 2400;
       }
       100% {
         stroke-dashoffset: 0;
@@ -150,12 +145,12 @@
 
     @keyframes glow {
       from {
-        opacity: 0.8;
-        filter: drop-shadow(0 0 5px #ff2a75);
+        opacity: 0.85;
+        filter: drop-shadow(0 0 8px #ff2a75);
       }
       to {
         opacity: 1;
-        filter: drop-shadow(0 0 15px #ff2a75);
+        filter: drop-shadow(0 0 20px #ff2a75);
       }
     }
   </style>
@@ -167,36 +162,35 @@
     <span>&#8734;</span> ❤️
   </div>
 
-  <!-- Merkezdeki Kalp Yapısı -->
-  <div class="heart-container">
-    <canvas id="heartCanvas" width="600" height="600"></canvas>
+  <!-- Büyütülmüş Kalp Yapısı -->
+  <div class="heart-container" id="heartContainer">
+    <canvas id="heartCanvas"></canvas>
     
     <div class="center-text">
       <h1>ESİLA</h1>
-      <p>Forever & Always</p>
     </div>
   </div>
 
   <!-- Alt Kısım: Kalp Ritmi (EKG) Çizgisi -->
   <div class="ecg-container">
-    <svg class="ecg-svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <svg class="ecg-svg" viewBox="0 0 1200 100" preserveAspectRatio="none">
       <path class="ecg-line" d="
-        M 0,60 
-        L 300,60 
-        L 310,40 
-        L 320,80 
-        L 330,20 
-        L 345,100 
-        L 360,50 
-        L 370,60 
-        L 700,60 
-        L 710,35 
-        L 720,85 
-        L 730,15 
-        L 745,105 
-        L 760,45 
-        L 770,60 
-        L 1200,60" 
+        M 0,50 
+        L 350,50 
+        L 360,30 
+        L 370,70 
+        L 380,15 
+        L 395,85 
+        L 410,40 
+        L 420,50 
+        L 780,50 
+        L 790,30 
+        L 800,70 
+        L 810,15 
+        L 825,85 
+        L 840,40 
+        L 850,50 
+        L 1200,50" 
       />
     </svg>
   </div>
@@ -204,89 +198,86 @@
   <script>
     const canvas = document.getElementById('heartCanvas');
     const ctx = canvas.getContext('2d');
+    const container = document.getElementById('heartContainer');
 
-    const width = canvas.width;
-    const height = canvas.height;
+    function resizeCanvas() {
+      canvas.width = container.clientWidth;
+      canvas.height = container.clientHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-    // İngilizce sevgi kelimeleri ve cümleleri
+    // Kalbi oluşturacak İngilizce ifadeler
     const words = [
       "I LOVE YOU", "MY LOVE", "FOREVER", "ALWAYS", 
-      "YOU ARE MY EVERYTHING", "SWEETHEART", "HONEY", 
-      "BEAUTIFUL", "MY REASON", "I ADORE YOU", "YOU&ME", 
-      "SOULMATE", "ENDLESS LOVE", "MY ANGEL", "I NEED YOU"
+      "YOU ARE MY WORLD", "SWEETHEART", "I ADORE YOU", 
+      "BEAUTIFUL", "YOU & ME", "SOULMATE", "ENDLESS LOVE", 
+      "MY EVERYTHING", "MY ANGEL", "NEED YOU", "SPECIAL"
     ];
 
-    // Kalp formülüne göre koordinat hesaplama
-    function getHeartPoint(t) {
-      // t: 0 - 2*PI arası
+    // Büyütülmüş Kalp Formülü
+    function getHeartPoint(t, scaleX, scaleY) {
       const x = 16 * Math.pow(Math.sin(t), 3);
       const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
       
-      // Canvas merkezine ölçeklendirme ve taşıma
       return {
-        x: width / 2 + x * 15,
-        y: height / 2 + y * 15
+        x: canvas.width / 2 + x * scaleX,
+        y: canvas.height / 2 + y * scaleY
       };
     }
 
-    // Kalp çevresinde duracak kelimeleri hazırlama
-    const totalItems = 70;
+    const totalItems = 85;
     const items = [];
 
     for (let i = 0; i < totalItems; i++) {
-      const t = (i / totalItems) * Math.PI * 2;
-      const pos = getHeartPoint(t);
-      
-      // Teğet açısını hesaplama (yazıların çizgi yönünde eğilmesi için)
-      const delta = 0.01;
-      const posNext = getHeartPoint(t + delta);
-      const angle = Math.atan2(posNext.y - pos.y, posNext.x - pos.x);
-
       items.push({
-        x: pos.x,
-        y: pos.y,
-        angle: angle,
+        t: (i / totalItems) * Math.PI * 2,
         text: words[i % words.length],
-        fontSize: Math.floor(Math.random() * 6) + 10, // 10px - 15px arası
-        alpha: Math.random(),
-        speed: 0.01 + Math.random() * 0.02,
-        hue: Math.floor(Math.random() * 40) + 330 // Pembe-Kırmızı tonları
+        fontSize: Math.floor(Math.random() * 4) + 14, // 14px - 17px Kalın ve büyük punto
+        phase: Math.random() * Math.PI * 2, // Yumuşak geçiş için faz farkı
+        speed: 0.02 + Math.random() * 0.015,
+        hue: Math.floor(Math.random() * 30) + 335 // Parlak pembe-kırmızı tonları
       });
     }
 
-    // Parçacık efektleri (içeride ve dışarıda uçuşan parlak noktalar)
+    // Yüzen tatlı parlak noktalar
     const particles = [];
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 50; i++) {
       particles.push({
-        x: width / 2 + (Math.random() - 0.5) * 300,
-        y: height / 2 + (Math.random() - 0.5) * 300,
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
         size: Math.random() * 3 + 1,
         alpha: Math.random(),
-        speedY: -(Math.random() * 0.8 + 0.2),
-        speedX: (Math.random() - 0.5) * 0.5
+        speedY: -(Math.random() * 0.6 + 0.2)
       });
     }
 
-    // Çizim ve Animasyon Döngüsü
     function animate() {
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // 1. Kalbi oluşturan kelimeleri çiz
+      // Ekran boyutuna göre kalbin ölçeğini ayarlama (Büyük kalp)
+      const scaleX = Math.min(canvas.width, canvas.height) / 32;
+      const scaleY = scaleX;
+
+      // 1. Kalbi oluşturan kalın ve yatay yazılar
       items.forEach((item) => {
-        // Opaklık değişimi (yanıp sönme / değişim efekti)
-        item.alpha += item.speed;
-        if (item.alpha > 1 || item.alpha < 0.2) {
-          item.speed = -item.speed;
-        }
+        item.phase += item.speed;
+        
+        // Yumuşak geçişli opaklık (Sine wave)
+        const alpha = 0.35 + (Math.sin(item.phase) + 1) * 0.32; 
+
+        const pos = getHeartPoint(item.t, scaleX, scaleY);
 
         ctx.save();
-        ctx.translate(item.x, item.y);
-        ctx.rotate(item.angle);
+        ctx.translate(pos.x, pos.y);
+        // NOT: ctx.rotate KALDIRILDI -> Yazılar tamamen YATAY duruyor.
+
+        ctx.font = `900 ${item.fontSize}px 'Segoe UI', sans-serif`;
+        ctx.fillStyle = `hsla(${item.hue}, 100%, 70%, ${alpha})`;
         
-        ctx.font = `bold ${item.fontSize}px Arial`;
-        ctx.fillStyle = `hsla(${item.hue}, 100%, 65%, ${item.alpha})`;
-        ctx.shadowColor = `hsl(${item.hue}, 100%, 50%)`;
-        ctx.shadowBlur = 8;
+        // Kalın ve belirgin görünüm için neon gölge
+        ctx.shadowColor = `hsl(${item.hue}, 100%, 55%)`;
+        ctx.shadowBlur = 12;
         
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -295,23 +286,22 @@
         ctx.restore();
       });
 
-      // 2. Uçuşan parlak pembe parçacıkları çizmeleri
+      // 2. Parçacıklar
       particles.forEach((p) => {
         p.y += p.speedY;
-        p.x += p.speedX;
-        p.alpha -= 0.005;
+        p.alpha -= 0.003;
 
-        if (p.alpha <= 0 || p.y < 50) {
-          p.y = height / 2 + (Math.random() - 0.5) * 200;
-          p.x = width / 2 + (Math.random() - 0.5) * 200;
+        if (p.alpha <= 0 || p.y < 0) {
+          p.y = canvas.height;
+          p.x = Math.random() * canvas.width;
           p.alpha = Math.random();
         }
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 105, 180, ${p.alpha})`;
+        ctx.fillStyle = `rgba(255, 80, 150, ${p.alpha})`;
         ctx.shadowColor = "#ff2a75";
-        ctx.shadowBlur = 6;
+        ctx.shadowBlur = 8;
         ctx.fill();
       });
 
