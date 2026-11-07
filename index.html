@@ -166,6 +166,42 @@ footer {
     opacity: 0;
   }
 }
+
+/* Dokununca çıkan küçük kalpler */
+
+.tap-heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  color: #ff85bd;
+  font-size: 20px;
+  animation: tapHeartRise 1.5s ease-out forwards;
+  filter: drop-shadow(0 0 7px #ff4b9b);
+  user-select: none;
+}
+
+@keyframes tapHeartRise {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(.5) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(
+      calc(-50% + var(--x)),
+      calc(-50% - 35px)
+    ) scale(1.2) rotate(20deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(
+      calc(-50% + var(--x)),
+      calc(-50% - 100px)
+    ) scale(.4) rotate(-25deg);
+  }
+}
 </style>
 </head>
 
@@ -247,6 +283,8 @@ footer {
 </main>
 
 <script>
+
+// Yıldızlar
 const stars = document.getElementById("stars");
 
 for(let i=0;i<45;i++){
@@ -260,21 +298,26 @@ for(let i=0;i<45;i++){
   stars.appendChild(star);
 }
 
+// Sürprizi aç
 function openSurprise(){
   document.getElementById("surprise").classList.remove("hidden");
   document.querySelector("button").style.display="none";
+
   document.getElementById("surprise").scrollIntoView({
     behavior:"smooth"
   });
+
   burst();
 }
 
+// Mektubu aç
 function openLetter(){
   document.getElementById("letter").classList.remove("hidden");
   document.getElementById("hint").textContent="❤️";
   burst();
 }
 
+// Yukarı çıkan kalpler
 function burst(){
   for(let i=0;i<18;i++){
     const p=document.createElement("div");
@@ -284,10 +327,43 @@ function burst(){
     p.style.fontSize=(15+Math.random()*20)+"px";
     p.style.color="#ff9dce";
     p.style.animationDuration=(4+Math.random()*3)+"s";
+
     document.body.appendChild(p);
+
     setTimeout(()=>p.remove(),7000);
   }
 }
+
+// Ekranın dokunulan her yerinde küçük kalpler
+document.addEventListener("pointerdown", function(e){
+
+  for(let i=0;i<5;i++){
+
+    const heart=document.createElement("div");
+
+    heart.className="tap-heart";
+
+    heart.textContent=["♥","♡","💕","❤"][
+      Math.floor(Math.random()*4)
+    ];
+
+    heart.style.left=e.clientX+"px";
+    heart.style.top=e.clientY+"px";
+
+    heart.style.setProperty(
+      "--x",
+      (Math.random()*100-50)+"px"
+    );
+
+    heart.style.fontSize=(12+Math.random()*15)+"px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),1500);
+  }
+
+});
+
 </script>
 
 </body>
